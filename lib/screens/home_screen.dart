@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../app.dart';
 import '../models/saved_calculation.dart';
 import '../services/local_storage_service.dart';
@@ -121,7 +122,16 @@ class _HomeScreenState extends State<HomeScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HVAC Calc Pro'),
+        title: SvgPicture.asset(
+          'assets/whisen_logo.svg',
+          height: 28,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : const Color(0xFF2D2926),
+            BlendMode.srcIn,
+          ),
+        ),
         centerTitle: false,
         actions: [
           ValueListenableBuilder<ThemeMode>(
@@ -317,27 +327,18 @@ class _HeroBlock extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(Icons.thermostat_rounded, color: theme.colorScheme.primary, size: 22),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Quick Calc', style: theme.textTheme.titleLarge),
-                  Text('HVAC попереднiй пiдбiр', style: theme.textTheme.bodySmall),
-                ],
-              ),
-            ],
+          SvgPicture.asset(
+            'assets/whisen_logo.svg',
+            height: 32,
+            colorFilter: ColorFilter.mode(
+              theme.brightness == Brightness.dark
+                  ? Colors.white
+                  : const Color(0xFF2D2926),
+              BlendMode.srcIn,
+            ),
           ),
+          const SizedBox(height: 4),
+          Text('HVAC попереднiй пiдбiр', style: theme.textTheme.bodySmall),
           const SizedBox(height: 16),
           Container(height: 1, color: theme.colorScheme.outline),
           const SizedBox(height: 16),
