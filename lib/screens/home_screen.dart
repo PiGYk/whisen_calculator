@@ -230,7 +230,7 @@ class _HomeContent extends StatelessWidget {
 
     if (wide) {
       return SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
+        padding: const EdgeInsets.fromLTRB(24, 24, 24, 80),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -243,7 +243,7 @@ class _HomeContent extends StatelessWidget {
     }
 
     return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
       children: [
         actions,
         const SizedBox(height: 32),

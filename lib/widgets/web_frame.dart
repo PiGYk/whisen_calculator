@@ -14,12 +14,21 @@ class WebFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: maxWidth),
-        child: child,
-      ),
+    return LayoutBuilder(
+      builder: (_, constraints) {
+        final h = constraints.maxHeight;
+        return Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: maxWidth,
+              minHeight: h.isFinite ? h : 0,
+              maxHeight: h.isFinite ? h : double.infinity,
+            ),
+            child: child,
+          ),
+        );
+      },
     );
   }
 }

@@ -167,7 +167,7 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
               : 'Збереженi проекти (${projects.length})',
         ),
       ),
-      body: WebFrame(
+      body: SafeArea(child: WebFrame(
         maxWidth: 900,
         child: projects.isEmpty
           ? Center(
@@ -198,7 +198,7 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
               ),
             )
           : ListView.separated(
-              padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 80),
               itemCount: projects.length,
               separatorBuilder: (_, __) => const SizedBox(height: 10),
               itemBuilder: (context, index) {
@@ -216,7 +216,7 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
                 );
               },
             ),
-        ),
+        )),
     );
   }
 }

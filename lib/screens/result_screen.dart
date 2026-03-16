@@ -44,9 +44,10 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(saveMode ? 'Результат розрахунку' : 'Деталi проекту'),
       ),
-      body: WebFrame(
+      body: SafeArea(
+        child: WebFrame(
         child: ListView(
-        padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
+        padding: const EdgeInsets.fromLTRB(24, 16, 24, 80),
         children: [
 
           // ── Project header ────────────────────────
@@ -254,6 +255,7 @@ class ResultScreen extends StatelessWidget {
             ),
           ],
         ],
+      ),
       ),
       ),
     );

@@ -154,7 +154,7 @@ class _NewCalculationScreenState extends State<NewCalculationScreen> {
           child: Form(
           key: _formKey,
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(24, 12, 24, 32),
+            padding: const EdgeInsets.fromLTRB(24, 12, 24, 80),
             children: [
               // ── Quick / Advanced toggle ──────────────────
               _ModeToggle(

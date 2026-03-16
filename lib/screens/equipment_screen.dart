@@ -89,7 +89,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
           ),
         ),
       ),
-      body: _buildBody(),
+      body: SafeArea(child: _buildBody()),
     );
   }
 
@@ -158,7 +158,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
     return WebFrame(
       maxWidth: 900,
       child: ListView(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 80),
       children: [
 
         // ── Required power banner ──────────────────────────

@@ -55,8 +55,8 @@ class _ProposalScreenState extends State<ProposalScreen> {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 40),
+      body: SafeArea(child: ListView(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 80),
         children: [
           _HeaderCard(project: p, dateStr: _fmtDate(p.createdAt)),
           const SizedBox(height: 14),
@@ -76,7 +76,7 @@ class _ProposalScreenState extends State<ProposalScreen> {
           const SizedBox(height: 8),
           _PdfBanner(),
         ],
-      ),
+      )),
     );
   }
 }
