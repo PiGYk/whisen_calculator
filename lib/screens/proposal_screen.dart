@@ -4,6 +4,7 @@ import '../models/saved_calculation.dart';
 import '../models/selection_result.dart';
 import '../models/equipment_model.dart';
 import '../theme/app_theme.dart';
+import '../widgets/web_frame.dart';
 
 class ProposalScreen extends StatefulWidget {
   final ProposalData data;
@@ -55,7 +56,9 @@ class _ProposalScreenState extends State<ProposalScreen> {
           ),
         ],
       ),
-      body: SafeArea(child: ListView(
+      body: SafeArea(child: WebFrame(
+        maxWidth: 800,
+        child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 80),
         children: [
           _HeaderCard(project: p, dateStr: _fmtDate(p.createdAt)),
@@ -76,7 +79,7 @@ class _ProposalScreenState extends State<ProposalScreen> {
           const SizedBox(height: 8),
           _PdfBanner(),
         ],
-      )),
+      ))),
     );
   }
 }

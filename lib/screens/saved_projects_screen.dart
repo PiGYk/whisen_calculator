@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/saved_calculation.dart';
 import '../theme/app_theme.dart';
+import '../widgets/app_empty_state.dart';
 import '../widgets/web_frame.dart';
 import 'result_screen.dart';
 import 'edit_project_screen.dart';
@@ -156,7 +157,6 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final projects = widget.projects;
 
     return Scaffold(
@@ -170,32 +170,10 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
       body: SafeArea(child: WebFrame(
         maxWidth: 900,
         child: projects.isEmpty
-          ? Center(
-              child: Padding(
-                padding: const EdgeInsets.all(32),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.folder_open_rounded,
-                      size: 56,
-                      color: theme.colorScheme.primary.withValues(alpha: 0.3),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Ще немає збережених розрахункiв',
-                      style: theme.textTheme.titleMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Створи перший через головний екран',
-                      style: theme.textTheme.bodySmall,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
+          ? AppEmptyState(
+              icon: Icons.folder_open_rounded,
+              title: 'Ще немає збережених розрахункiв',
+              subtitle: 'Створи перший через головний екран',
             )
           : ListView.separated(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 80),

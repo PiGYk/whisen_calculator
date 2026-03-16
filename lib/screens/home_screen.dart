@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../app.dart';
 import '../models/saved_calculation.dart';
 import '../services/local_storage_service.dart';
+import '../widgets/app_empty_state.dart';
 import '../widgets/section_title.dart';
 import '../widgets/web_frame.dart';
 import 'new_calculation_screen.dart';
@@ -160,7 +161,13 @@ class _HomeScreenState extends State<HomeScreen> {
           : SafeArea(
               child: WebFrame(
                 child: savedProjects.isEmpty
-                    ? _EmptyState(onNewCalc: _goToNewCalc)
+                    ? AppEmptyState(
+                        icon: Icons.thermostat_rounded,
+                        title: 'Поки що нема проектiв',
+                        subtitle: 'Створи перший розрахунок — введи площу, висоту стелi та параметри примiщення.',
+                        buttonLabel: 'Створити перший розрахунок',
+                        onButton: _goToNewCalc,
+                      )
                     : _HomeContent(
                         savedCount: savedProjects.length,
                         onNewCalc: _goToNewCalc,
@@ -249,60 +256,6 @@ class _HomeContent extends StatelessWidget {
         const SizedBox(height: 32),
         featureCards,
       ],
-    );
-  }
-}
-
-// ─────────────────────────────────────────────
-// Empty state — коли ще нема жодного проекту
-// ─────────────────────────────────────────────
-class _EmptyState extends StatelessWidget {
-  final VoidCallback onNewCalc;
-  const _EmptyState({required this.onNewCalc});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary.withValues(alpha: 0.08),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.thermostat_rounded,
-                size: 40,
-                color: theme.colorScheme.primary.withValues(alpha: 0.6),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              'Поки що нема проектiв',
-              style: theme.textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Створи перший розрахунок — введи площу, висоту стелi та параметри примiщення.',
-              style: theme.textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 32),
-            ElevatedButton.icon(
-              onPressed: onNewCalc,
-              icon: const Icon(Icons.add_rounded, size: 20),
-              label: const Text('Створити перший розрахунок'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

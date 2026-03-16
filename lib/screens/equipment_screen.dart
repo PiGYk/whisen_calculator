@@ -4,6 +4,7 @@ import '../models/selection_result.dart';
 import '../models/proposal_data.dart';
 import '../services/catalog_service.dart';
 import '../services/selection_engine.dart';
+import '../widgets/app_empty_state.dart';
 import '../widgets/equipment_card.dart';
 import '../widgets/web_frame.dart';
 import '../theme/app_theme.dart';
@@ -134,24 +135,11 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
     }
 
     if (_result == null || _result!.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.search_off_rounded, size: 56, color: Theme.of(context).colorScheme.outline),
-              const SizedBox(height: 16),
-              Text('Нiчого не знайдено', style: theme.textTheme.titleMedium),
-              const SizedBox(height: 8),
-              Text(
-                'Для ${_requiredKw.toStringAsFixed(1)} кВт пiдходящих моделей немає.',
-                style: theme.textTheme.bodySmall,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
+      return AppEmptyState(
+        icon: Icons.search_off_rounded,
+        iconColor: Theme.of(context).colorScheme.outline,
+        title: 'Нiчого не знайдено',
+        subtitle: 'Для ${_requiredKw.toStringAsFixed(1)} кВт пiдходящих моделей немає.',
       );
     }
 

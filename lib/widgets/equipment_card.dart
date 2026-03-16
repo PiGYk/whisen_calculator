@@ -68,8 +68,15 @@ class EquipmentCard extends StatelessWidget {
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: AppColors.muted(context),
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Text(m.id, style: theme.textTheme.titleMedium),
+                        Text(
+                          m.id,
+                          style: theme.textTheme.titleMedium,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ],
                     ),
                   ),
@@ -105,6 +112,8 @@ class EquipmentCard extends StatelessWidget {
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: AppColors.muted(context),
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
 

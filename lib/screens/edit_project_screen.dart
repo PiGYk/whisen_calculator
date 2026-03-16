@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/saved_calculation.dart';
 import '../services/hvac_calculator_service.dart';
 import '../widgets/section_title.dart';
+import '../widgets/web_frame.dart';
 
 /// Екран редагування iснуючого проекту.
 /// Повертає оновлений [SavedCalculation] або null якщо скасовано.
@@ -154,10 +155,12 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
         ],
       ),
       body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        child: WebFrame(
+          maxWidth: 680,
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 80),
             children: [
               TextFormField(
                 controller: _projectNameCtrl,
@@ -297,6 +300,7 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
                 child: const Text('Скасувати'),
               ),
             ],
+          ),
           ),
         ),
       ),
