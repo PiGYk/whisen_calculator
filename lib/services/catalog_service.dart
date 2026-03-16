@@ -33,9 +33,11 @@ class CatalogService {
           final features    = List<String>.from(s['features']    as List);
           final application = List<String>.from(s['application'] as List);
 
+          final photoFile = s['photo'] as String?;
+          final seriesImgPath = photoFile != null ? 'assets/data/photo/$photoFile' : null;
+
           for (final mJson in s['models'] as List) {
             final m = mJson as Map<String, dynamic>;
-            final imgPath = 'assets/images/series/$seriesId/${m['id']}.png';
 
             results.add(EquipmentModel(
               id:               m['id']               as String,
@@ -60,7 +62,7 @@ class CatalogService {
               maxIndoorUnits:   (m['max_indoor_units']  as num?)?.toInt(),
               voltage:          m['voltage']            as String,
               refrigerant:      m['refrigerant']        as String,
-              imagePath:        imgPath,
+              imagePath:        seriesImgPath,
             ));
           }
         }

@@ -120,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: SvgPicture.asset(
@@ -137,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           ValueListenableBuilder<ThemeMode>(
             valueListenable: HvacCalcApp.themeNotifier,
-            builder: (_, mode, __) => IconButton(
+            builder: (_, mode, _) => IconButton(
               onPressed: () {
                 HvacCalcApp.themeNotifier.value =
                     mode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;

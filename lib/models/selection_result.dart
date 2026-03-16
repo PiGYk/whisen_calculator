@@ -17,7 +17,7 @@ class SelectionResult {
 
   bool get isEmpty => primaryOptions.isEmpty && analog == null;
 
-  List<SelectionOption> get options => [...primaryOptions, if (analog != null) analog!];
+  List<SelectionOption> get options => [...primaryOptions, ?analog];
 }
 
 class SelectionOption {

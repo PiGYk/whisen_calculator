@@ -17,7 +17,7 @@ class _HvacCalcAppState extends State<HvacCalcApp> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: HvacCalcApp.themeNotifier,
-      builder: (_, mode, __) => MaterialApp(
+      builder: (_, mode, _) => MaterialApp(
         title: 'HVAC Calc Pro',
         debugShowCheckedModeBanner: false,
         themeMode: mode,

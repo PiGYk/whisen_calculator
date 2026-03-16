@@ -185,7 +185,6 @@ class _ClientCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return _Section(
       icon: Icons.person_outline_rounded,
       title: 'Клiєнт',
@@ -702,7 +701,6 @@ class _ParamGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final rows  = <List<_Param>>[];
     for (var i = 0; i < params.length; i += 2) {
       rows.add(params.sublist(i, (i + 2).clamp(0, params.length)));

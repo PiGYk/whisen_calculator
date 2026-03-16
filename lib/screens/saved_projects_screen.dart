@@ -127,7 +127,7 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
                   Navigator.pop(context);
                   final duplicate = item.copyWith(
                     id: DateTime.now().microsecondsSinceEpoch.toString(),
-                    projectName: item.projectName + ' (копiя)',
+                    projectName: '${item.projectName} (копiя)',
                     createdAt: DateTime.now(),
                   );
                   await widget.onDuplicate(duplicate);
@@ -178,7 +178,7 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
           : ListView.separated(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 80),
               itemCount: projects.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              separatorBuilder: (_, _) => const SizedBox(height: 10),
               itemBuilder: (context, index) {
                 final item = projects[index];
                 return _ProjectCard(
