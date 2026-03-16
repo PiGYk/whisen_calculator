@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter devices:*)",
+      "Bash(flutter run:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(flutter build:*)",
+      "Bash(adb install:*)",
+      "Bash(which convert:*)",
+      "Bash(SRC=\"/home/oleh/develop/hvac_calc_pro/docs/Frame\\(1\\).png\"\nBASE=\"/home/oleh/develop/hvac_calc_pro/android/app/src/main/res\"\n\nmagick \"$SRC\" -resize 48x48   \"$BASE/mipmap-mdpi/ic_launcher.png\"\nmagick \"$SRC\" -resize 72x72   \"$BASE/mipmap-hdpi/ic_launcher.png\"\nmagick \"$SRC\" -resize 96x96   \"$BASE/mipmap-xhdpi/ic_launcher.png\"\nmagick \"$SRC\" -resize 144x144 \"$BASE/mipmap-xxhdpi/ic_launcher.png\"\nmagick \"$SRC\" -resize 192x192 \"$BASE/mipmap-xxxhdpi/ic_launcher.png\"\n\necho \"Done\")",
+      "Bash(ls:*)",
+      "Bash(adb devices:*)",
+      "Bash(adb:*)",
+      "Bash(flutter pub:*)",
+      "Bash(sudo pacman:*)",
+      "Bash(yay:*)",
+      "Bash(paru:*)",
+      "Bash(flatpak install:*)",
+      "Bash(for f:*)",
+      "Bash(do name=\"$f%.wav\" ffmpeg -y -i \"$f\" -ac 1 -ar 44100 -b:a 96k \"$name.mp3\")",
+      "Bash(cd:*)",
+      "Bash(mkdir:*)",
+      "Bash(dart run:*)",
+      "Bash(ffmpeg:*)",
+      "Read(//home/oleh/.pub-cache/hosted/pub.dev/flutter_timezone-5.0.2/lib/**)",
+      "Read(//home/oleh/.pub-cache/**)",
+      "Bash(keytool:*)",
+      "WebFetch(domain:kenney.nl)",
+      "Read(//tmp/**)",
+      "Bash(curl -L -o kenney_interface-sounds.zip \"https://kenney.nl/media/pages/assets/interface-sounds/d23a84242e-1677589452/kenney_interface-sounds.zip\")",
+      "Bash(curl -L -o kenney_impact-sounds.zip \"https://kenney.nl/media/pages/assets/impact-sounds/8aa7b545c9-1677589768/kenney_impact-sounds.zip\")",
+      "Bash(cp:*)",
+      "Bash(find:*)",
+      "Bash(docker build:*)",
+      "Bash(podman build:*)",
+      "Bash(podman run:*)",
+      "Bash(podman rm:*)",
+      "Bash(git init:*)"
+    ]
+  }
+}
