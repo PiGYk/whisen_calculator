@@ -3,6 +3,7 @@ import '../app.dart';
 import '../models/saved_calculation.dart';
 import '../services/local_storage_service.dart';
 import '../widgets/section_title.dart';
+import '../widgets/web_frame.dart';
 import 'new_calculation_screen.dart';
 import 'saved_projects_screen.dart';
 
@@ -147,57 +148,97 @@ class _HomeScreenState extends State<HomeScreen> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : SafeArea(
-              child: savedProjects.isEmpty
-                  ? _EmptyState(onNewCalc: _goToNewCalc)
-                  : ListView(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-                      children: [
-                        _HeroBlock(savedCount: savedProjects.length),
-                        const SizedBox(height: 24),
-                        ElevatedButton.icon(
-                          onPressed: _goToNewCalc,
-                          icon: const Icon(Icons.add, size: 20),
-                          label: const Text('Новий розрахунок'),
-                        ),
-                        const SizedBox(height: 12),
-                        OutlinedButton.icon(
-                          onPressed: _goToSavedProjects,
-                          icon: const Icon(Icons.folder_outlined, size: 20),
-                          label: Text('Збереженi проекти (${savedProjects.length})'),
-                        ),
-                        const SizedBox(height: 32),
-                        const SectionTitle('Можливостi'),
-                        const SizedBox(height: 8),
-                        _FeatureCard(
-                          icon: Icons.ac_unit_rounded,
-                          title: 'Cooling / Heating load',
-                          subtitle: 'Орiєнтовна потужнiсть для першого КП',
-                          color: theme.colorScheme.primary,
-                        ),
-                        const SizedBox(height: 10),
-                        _FeatureCard(
-                          icon: Icons.bolt_rounded,
-                          title: 'Оцiнка споживання',
-                          subtitle: 'кВт·год/мiсяць та приблизна вартiсть',
-                          color: const Color(0xFFFFB347),
-                        ),
-                        const SizedBox(height: 10),
-                        _FeatureCard(
-                          icon: Icons.save_alt_rounded,
-                          title: 'Локальне збереження',
-                          subtitle: 'Проекти зберiгаються без хмари',
-                          color: const Color(0xFF4CAF50),
-                        ),
-                        const SizedBox(height: 10),
-                        _FeatureCard(
-                          icon: Icons.edit_rounded,
-                          title: 'Редагування i дублювання',
-                          subtitle: 'Три крапки на картцi проекту',
-                          color: const Color(0xFF9C6FFF),
-                        ),
-                      ],
-                    ),
+              child: WebFrame(
+                child: savedProjects.isEmpty
+                    ? _EmptyState(onNewCalc: _goToNewCalc)
+                    : _HomeContent(
+                        savedCount: savedProjects.length,
+                        onNewCalc: _goToNewCalc,
+                        onSaved: _goToSavedProjects,
+                      ),
+              ),
             ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────
+// Home content — single/two-column adaptive
+// ─────────────────────────────────────────────
+class _HomeContent extends StatelessWidget {
+  final int savedCount;
+  final VoidCallback onNewCalc;
+  final VoidCallback onSaved;
+
+  const _HomeContent({
+    required this.savedCount,
+    required this.onNewCalc,
+    required this.onSaved,
+  });
+
+  static const _features = [
+    (Icons.ac_unit_rounded,    'Cooling / Heating load',     'Орiєнтовна потужнiсть для першого КП',   Color(0xFFA50034)),
+    (Icons.bolt_rounded,       'Оцiнка споживання',          'кВт·год/мiсяць та приблизна вартiсть',   Color(0xFFFFB347)),
+    (Icons.save_alt_rounded,   'Локальне збереження',        'Проекти зберiгаються без хмари',          Color(0xFF4CAF50)),
+    (Icons.edit_rounded,       'Редагування i дублювання',   'Три крапки на картцi проекту',            Color(0xFF9C6FFF)),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final wide = isWide(context);
+
+    final actions = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _HeroBlock(savedCount: savedCount),
+        const SizedBox(height: 20),
+        ElevatedButton.icon(
+          onPressed: onNewCalc,
+          icon: const Icon(Icons.add, size: 20),
+          label: const Text('Новий розрахунок'),
+        ),
+        const SizedBox(height: 12),
+        OutlinedButton.icon(
+          onPressed: onSaved,
+          icon: const Icon(Icons.folder_outlined, size: 20),
+          label: Text('Збереженi проекти ($savedCount)'),
+        ),
+      ],
+    );
+
+    final featureCards = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const SectionTitle('Можливостi'),
+        const SizedBox(height: 8),
+        for (final (icon, title, subtitle, color) in _features) ...[
+          _FeatureCard(icon: icon, title: title, subtitle: subtitle, color: color),
+          const SizedBox(height: 10),
+        ],
+      ],
+    );
+
+    if (wide) {
+      return SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(flex: 5, child: actions),
+            const SizedBox(width: 28),
+            Expanded(flex: 5, child: featureCards),
+          ],
+        ),
+      );
+    }
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        actions,
+        const SizedBox(height: 32),
+        featureCards,
+      ],
     );
   }
 }

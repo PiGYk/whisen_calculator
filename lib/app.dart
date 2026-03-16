@@ -6,7 +6,7 @@ class HvacCalcApp extends StatefulWidget {
   const HvacCalcApp({super.key});
 
   // Статичний ключ для перемикання теми з будь-якого місця
-  static final themeNotifier = ValueNotifier<ThemeMode>(ThemeMode.dark);
+  static final themeNotifier = ValueNotifier<ThemeMode>(ThemeMode.light);
 
   @override
   State<HvacCalcApp> createState() => _HvacCalcAppState();

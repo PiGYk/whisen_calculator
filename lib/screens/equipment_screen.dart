@@ -5,6 +5,7 @@ import '../models/proposal_data.dart';
 import '../services/catalog_service.dart';
 import '../services/selection_engine.dart';
 import '../widgets/equipment_card.dart';
+import '../widgets/web_frame.dart';
 import '../theme/app_theme.dart';
 import 'proposal_screen.dart';
 
@@ -154,8 +155,10 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
       );
     }
 
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+    return WebFrame(
+      maxWidth: 900,
+      child: ListView(
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
       children: [
 
         // ── Required power banner ──────────────────────────
@@ -206,6 +209,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
 
         _Disclaimer(),
       ],
+    ),
     );
   }
 }

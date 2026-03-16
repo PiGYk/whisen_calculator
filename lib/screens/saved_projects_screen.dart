@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/saved_calculation.dart';
 import '../theme/app_theme.dart';
+import '../widgets/web_frame.dart';
 import 'result_screen.dart';
 import 'edit_project_screen.dart';
 
@@ -166,7 +167,9 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
               : 'Збереженi проекти (${projects.length})',
         ),
       ),
-      body: projects.isEmpty
+      body: WebFrame(
+        maxWidth: 900,
+        child: projects.isEmpty
           ? Center(
               child: Padding(
                 padding: const EdgeInsets.all(32),
@@ -195,7 +198,7 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
               ),
             )
           : ListView.separated(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
               itemCount: projects.length,
               separatorBuilder: (_, __) => const SizedBox(height: 10),
               itemBuilder: (context, index) {
@@ -213,6 +216,7 @@ class _SavedProjectsScreenState extends State<SavedProjectsScreen> {
                 );
               },
             ),
+        ),
     );
   }
 }

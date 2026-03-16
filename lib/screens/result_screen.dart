@@ -3,6 +3,7 @@ import '../models/saved_calculation.dart';
 import '../theme/app_theme.dart';
 import '../widgets/result_tile.dart';
 import '../widgets/param_row.dart';
+import '../widgets/web_frame.dart';
 import 'equipment_screen.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -43,8 +44,9 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(saveMode ? 'Результат розрахунку' : 'Деталi проекту'),
       ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+      body: WebFrame(
+        child: ListView(
+        padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
         children: [
 
           // ── Project header ────────────────────────
@@ -104,38 +106,8 @@ class ResultScreen extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // ── Power results ─────────────────────────
-          if (hasCooling) ...[
-            ResultTile(
-              title: 'Охолодження',
-              value: '${project.coolingKw.toStringAsFixed(2)} кВт',
-              icon: Icons.ac_unit_rounded,
-              accentColor: AppColors.cooling,
-            ),
-            const SizedBox(height: 10),
-          ],
-          if (hasHeating) ...[
-            ResultTile(
-              title: 'Опалення',
-              value: '${project.heatingKw.toStringAsFixed(2)} кВт',
-              icon: Icons.local_fire_department_rounded,
-              accentColor: AppColors.heating,
-            ),
-            const SizedBox(height: 10),
-          ],
-          ResultTile(
-            title: 'Споживання / мiсяць',
-            value: '${project.monthlyKwh.toStringAsFixed(0)} кВт·год',
-            icon: Icons.bolt_rounded,
-            accentColor: AppColors.energy,
-          ),
-          const SizedBox(height: 10),
-          ResultTile(
-            title: 'Вартiсть / мiсяць',
-            value: '${project.monthlyCost.toStringAsFixed(0)} грн',
-            icon: Icons.payments_outlined,
-            accentColor: AppColors.money,
-          ),
+          // ── Power results (2-col on wide screens) ─
+          _ResultTilesGrid(project: project, hasCooling: hasCooling, hasHeating: hasHeating),
 
           const SizedBox(height: 20),
 
@@ -283,7 +255,77 @@ class ResultScreen extends StatelessWidget {
           ],
         ],
       ),
+      ),
     );
+  }
+}
+
+// ─────────────────────────────────────────────
+// Result tiles — 2-col grid on wide screens
+// ─────────────────────────────────────────────
+class _ResultTilesGrid extends StatelessWidget {
+  final SavedCalculation project;
+  final bool hasCooling;
+  final bool hasHeating;
+
+  const _ResultTilesGrid({
+    required this.project,
+    required this.hasCooling,
+    required this.hasHeating,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final tiles = [
+      if (hasCooling)
+        ResultTile(
+          title: 'Охолодження',
+          value: '${project.coolingKw.toStringAsFixed(2)} кВт',
+          icon: Icons.ac_unit_rounded,
+          accentColor: AppColors.cooling,
+        ),
+      if (hasHeating)
+        ResultTile(
+          title: 'Опалення',
+          value: '${project.heatingKw.toStringAsFixed(2)} кВт',
+          icon: Icons.local_fire_department_rounded,
+          accentColor: AppColors.heating,
+        ),
+      ResultTile(
+        title: 'Споживання / мiсяць',
+        value: '${project.monthlyKwh.toStringAsFixed(0)} кВт·год',
+        icon: Icons.bolt_rounded,
+        accentColor: AppColors.energy,
+      ),
+      ResultTile(
+        title: 'Вартiсть / мiсяць',
+        value: '${project.monthlyCost.toStringAsFixed(0)} грн',
+        icon: Icons.payments_outlined,
+        accentColor: AppColors.money,
+      ),
+    ];
+
+    if (!isWide(context) || tiles.length < 2) {
+      return Column(
+        children: [
+          for (final t in tiles) ...[t, const SizedBox(height: 10)],
+        ],
+      );
+    }
+
+    // 2-column grid
+    final rows = <Widget>[];
+    for (int i = 0; i < tiles.length; i += 2) {
+      rows.add(Row(
+        children: [
+          Expanded(child: tiles[i]),
+          const SizedBox(width: 12),
+          Expanded(child: i + 1 < tiles.length ? tiles[i + 1] : const SizedBox()),
+        ],
+      ));
+      if (i + 2 < tiles.length) rows.add(const SizedBox(height: 12));
+    }
+    return Column(children: [...rows, const SizedBox(height: 10)]);
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/saved_calculation.dart';
 import '../services/hvac_calculator_service.dart';
 import '../widgets/section_title.dart';
+import '../widgets/web_frame.dart';
 import 'result_screen.dart';
 
 class NewCalculationScreen extends StatefulWidget {
@@ -148,10 +149,12 @@ class _NewCalculationScreenState extends State<NewCalculationScreen> {
         title: const Text('Новий розрахунок'),
       ),
       body: SafeArea(
-        child: Form(
+        child: WebFrame(
+          maxWidth: 680,
+          child: Form(
           key: _formKey,
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+            padding: const EdgeInsets.fromLTRB(24, 12, 24, 32),
             children: [
               // ── Quick / Advanced toggle ──────────────────
               _ModeToggle(
@@ -340,6 +343,7 @@ class _NewCalculationScreenState extends State<NewCalculationScreen> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );
